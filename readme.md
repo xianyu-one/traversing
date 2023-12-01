@@ -15,6 +15,12 @@ mkdocs的项目需要将文章的信息写入至配置文件中，当一次需�
 go build -o traversing main.go
 ```
 
+也可搭配`upx`缩小程序大小
+
+```bash
+go build -ldflags="-s -w" -o traversing main.go && upx -9 traversing
+```
+
 
 ## 使用
 

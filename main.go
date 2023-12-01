@@ -65,8 +65,12 @@ func generateFileTxt(fileTree map[string]interface{}, indent int) string {
 }
 
 func main() {
-	var rootPath string
+	var (
+		rootPath   string
+		outputPath string
+	)
 	flag.StringVar(&rootPath, "p", "", "要遍历的文件夹路径")
+	flag.StringVar(&outputPath, "o", "file_list.txt", "输出文件的路径和文件名")
 	flag.Parse()
 
 	if rootPath == "" {
@@ -78,11 +82,11 @@ func main() {
 	fileTree := generateFileTree(fileList, rootPath)
 	fileTxt := generateFileTxt(fileTree, 0)
 
-	err := ioutil.WriteFile("file_list.txt", []byte(fileTxt), 0644)
+	err := ioutil.WriteFile(outputPath, []byte(fileTxt), 0644)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 
-	fmt.Println("已生成文件列表txt文件")
+	fmt.Println("已生成文件列表文件")
 }
